@@ -16,10 +16,10 @@ function createWidget() {
   '<a class="edit-link pull-right" href="#">Edit</a>' +
   '</div>'
   + '<div class="selectbox hide-collapsed">'
-  + '<div class="form-group"><div class="control-label">Date</div><input placeholder="Date" name="timetrack_date" /></div>'
-  + '<div class="form-group"><div class="control-label">Hours</div><input placeholder="Hours" value="0" type="number" min="0" step="1" name="timetrack_hours" /></div>'
-  + '<div class="form-group"><div class="control-label">Minutes</div><input placeholder="Minutes" value="0" type="number" min="0" max="60" step="15" name="timetrack_minutes" /></div>'
-  + '<div class="form-group"><div class="control-label">Description</div><textarea name="timetrack_description" placeholder="Please enter your activity description here"></textarea></div>'
+  + '<div class="form-group"><div class="control-label">Date</div><div class="col-sm-10"><input placeholder="Date" name="timetrack_date" /></div></div>'
+  + '<div class="form-group"><div class="control-label">Hours</div><div class="col-sm-10"><input placeholder="Hours" value="0" type="number" min="0" step="1" name="timetrack_hours" /></div></div>'
+  + '<div class="form-group"><div class="control-label">Minutes</div><div class="col-sm-10"><input placeholder="Minutes" value="0" type="number" min="0" max="60" step="15" name="timetrack_minutes" /></div></div>'
+  + '<div class="form-group"><div class="control-label">Description</div><div class="col-sm-10"><textarea name="timetrack_description" placeholder="Please enter your activity description here"></textarea></div></div>'
   + '<button name="create_timetrack" value="Create" class="" type="submit">Create</button>'
   + '</div>'
   '</div>';
