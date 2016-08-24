@@ -3,7 +3,8 @@
 // @namespace   gitlab_time_tracking
 // @description Gitlab time tracking
 // @include     http://gitlab.ratioweb.pl/*
-// @version     1
+// @require     http://momentjs.com/downloads/moment-with-langs.min.js
+// @version     1.1
 // @grant       none
 // ==/UserScript==
 /**
@@ -16,6 +17,7 @@ function createWidget() {
   '<a class="edit-link pull-right" href="#">Edit</a>' +
   '</div>'
   + '<div class="selectbox hide-collapsed">'
+  + '<div class="form-group"><div class="control-label">Hours so far</div><div class="col-sm-10"><strong>' + aggregateSumOfTrackingComment() +'</strong></div></div>'
   + '<div class="form-group"><div class="control-label">Date</div><div class="col-sm-10"><input placeholder="Date" name="timetrack_date" /></div></div>'
   + '<div class="form-group"><div class="control-label">Hours</div><div class="col-sm-10"><input placeholder="Hours" value="0" type="number" min="0" step="1" name="timetrack_hours" /></div></div>'
   + '<div class="form-group"><div class="control-label">Minutes</div><div class="col-sm-10"><input placeholder="Minutes" value="0" type="number" min="0" max="60" step="15" name="timetrack_minutes" /></div></div>'
@@ -35,7 +37,6 @@ function createWidget() {
 /**
  * Create tracking comment.
  */
-
 function createTimeTrackingComment() {
   var hours = $('input[name=timetrack_hours]').val();
   var minutes = $('input[name=timetrack_minutes]').val();
@@ -64,6 +65,32 @@ function createTimeTrackingComment() {
     $('textarea[name="note[note]"]').trigger('input');
     $('.btn-create.comment-btn').click();
   }
+}
+
+function aggregateSumOfTrackingComment() {
+    var time = moment.duration();
+    $('li.note img.emoji[title=":clock1:"]').each (function() {
+      var data = $(this).parent().text().split('|').map(function(element) { return $.trim(element); });
+      var hours_matched = data[0].match(/(\d+)h/);
+      var minutes_matched = data[0].match(/(\d+)m/);
+      var days_matched = data[0].match(/(\d+)d/);
+
+      var hours = Array.isArray(hours_matched) ? hours_matched[1] : 0;
+      var minutes = Array.isArray(minutes_matched) ? minutes_matched[1] : 0;
+      var days = Array.isArray(days_matched) ? days_matched[1] : 0;
+
+      time.add(
+        moment.duration({
+          'hours': hours,
+          'minutes': minutes,
+          'days': days
+        })
+      );
+
+    });
+
+
+    return time.asHours();
 }
 
 
