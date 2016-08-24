@@ -13,11 +13,11 @@
 function createWidget() {
   // Create time tracking widget
   var timetracking = '<div class=\'block timetracking\'>' +
-  '<div class=\'title hide-collapsed\'>Time tracking' +
-  '<a class="edit-link pull-right" href="#">Edit</a>' +
+  '<div class=\'title hide-collapsed\'>Time tracking(<span class="bold">' + aggregateSumOfTrackingComment()  +
+  '</span>)<a class="edit-link pull-right" href="#">Edit</a>' +
   '</div>'
   + '<div class="selectbox hide-collapsed">'
-  + '<div class="form-group"><div class="control-label">Hours so far</div><div class="col-sm-10"><strong>' + aggregateSumOfTrackingComment() +'</strong></div></div>'
+  + '<div class="form-group"><div class="control-label">Hours so far</div><div class="col-sm-10"><strong>' + +'</strong></div></div>'
   + '<div class="form-group"><div class="control-label">Date</div><div class="col-sm-10"><input placeholder="Date" name="timetrack_date" /></div></div>'
   + '<div class="form-group"><div class="control-label">Hours</div><div class="col-sm-10"><input placeholder="Hours" value="0" type="number" min="0" step="1" name="timetrack_hours" /></div></div>'
   + '<div class="form-group"><div class="control-label">Minutes</div><div class="col-sm-10"><input placeholder="Minutes" value="0" type="number" min="0" max="60" step="15" name="timetrack_minutes" /></div></div>'
@@ -93,5 +93,7 @@ function aggregateSumOfTrackingComment() {
     return time.asHours();
 }
 
+createWidget();
+alert('bzz');
 
 $(function () { createWidget(); });
