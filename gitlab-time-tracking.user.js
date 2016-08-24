@@ -3,7 +3,7 @@
 // @namespace   gitlab_time_tracking
 // @description Gitlab time tracking
 // @include     http://gitlab.ratioweb.pl/*
-// @require     http://momentjs.com/downloads/moment-with-langs.min.js
+// @require     http://momentjs.com/downloads/moment-with-locales.min.js
 // @version     1.1
 // @grant       none
 // ==/UserScript==
