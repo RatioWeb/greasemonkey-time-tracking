@@ -23,7 +23,7 @@ function createWidget() {
   '</span>)<a class="edit-link pull-right" href="#">Edit</a>' +
   '</div>'
   + '<div class="selectbox hide-collapsed">'
-  + '<div class="form-group"><div class="control-label">Date</div><div class="col-sm-12"><input placeholder="Date" name="timetrack_date" /></div></div>'
+  + '<div class="form-group"><div class="control-label">Date</div><div class="col-sm-12"><input placeholder="Date" class="datepicker" name="timetrack_date" /></div></div>'
   + '<div class="form-group"><div class="control-label">Hours</div><div class="col-sm-12"><input placeholder="Hours" value="0" type="number" min="0" step="1" name="timetrack_hours" /></div></div>'
   + '<div class="form-group"><div class="control-label">Minutes</div><div class="col-sm-12"><input placeholder="Minutes" value="0" type="number" min="0" max="60" step="15" name="timetrack_minutes" /></div></div>'
   + '<div class="form-group"><div class="control-label">Description</div><div class="col-sm-12"><textarea name="timetrack_description" placeholder="Please enter your activity description here"></textarea></div></div>'
@@ -44,9 +44,18 @@ function createWidget() {
   '</div>';
   $('form.inline-update').append(timetracking);
   $('form.inline-update').append(estimation);
-  $('input[name=timetrack_date]').datepicker({
-    dateFormat: 'yy-mm-dd'
-  });
+  
+  var $dateField = $('input[name=timetrack_date]');
+  
+  new Pikaday({
+    field: $dateField.get(0),
+    format: 'yyyy-mm-dd',
+    onSelect: function(dateText) {
+      dateField.val(dateFormat(new Date(dateText), 'yyyy-mm-dd'));
+    }
+  }).setDate(new Date($dateField.val()));
+  
+
   $('button[name=create_timetrack]').click(function () {
     createTimeTrackingComment(':clock1:', '', 'timetrack');
     return false;
@@ -71,17 +80,21 @@ function createTimeTrackingComment(emoji, additional, type) {
   var replace = /\|/gi;
   var text = emoji + ' ' + additional;
   var time_is_entered = (hours + minutes > 0);
+  var time_string = type === 'timetrack' ? "/spend " : "/estimate ";
+  
   if (!time_is_entered) {
   } 
   else {
     if (hours != 0) {
+      time_string = time_string + hours + 'h';
       text = text + ' ' + hours + 'h';
     }
     if (minutes != 0) {
+      time_string = time_string + ' ' + minutes + 'm';
       text = text + ' ' + minutes + 'm';
     }
     if (date != '' && (typeof date != "undefined")) {
-      text = text + ' | ' + date + ' ';
+      text = text + ' | ' + dateFormat(new Date(date), 'yyyy-mm-dd') + ' ';
     }
     if (description != '') {
       text = text + ' | ' + description.replace(replace, '');
@@ -90,6 +103,17 @@ function createTimeTrackingComment(emoji, additional, type) {
     $('textarea[name="note[note]"]').trigger('focus');
     $('textarea[name="note[note]"]').trigger('input');
     $('.btn-create.comment-btn').click();
+    
+    setTimeout(
+      function () {
+        $('textarea[name="note[note]"]').val(time_string);
+        $('textarea[name="note[note]"]').trigger('focus');
+        $('textarea[name="note[note]"]').trigger('input');
+        $('.btn-create.comment-btn').click();    
+      },
+      1500
+    )
+    
   }
 }
 
