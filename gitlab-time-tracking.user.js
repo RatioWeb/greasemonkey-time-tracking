@@ -26,8 +26,8 @@ function createWidget() {
   + '<div class="form-group"><div class="control-label">Date</div><div class="col-sm-12"><input placeholder="Date" class="datepicker" name="timetrack_date" /></div></div>'
   + '<div class="form-group"><div class="control-label">Hours</div><div class="col-sm-12"><input placeholder="Hours" value="0" type="number" min="0" step="1" name="timetrack_hours" /></div></div>'
   + '<div class="form-group"><div class="control-label">Minutes</div><div class="col-sm-12"><input placeholder="Minutes" value="0" type="number" min="0" max="60" step="15" name="timetrack_minutes" /></div></div>'
-  + '<div class="form-group"><div class="control-label">Description</div><div class="col-sm-12"><textarea name="timetrack_description" placeholder="Please enter your activity description here"></textarea></div></div>'
-  + '<div class="form-group"><div class="control-label">Free hours?</div><div><input type="checkbox" checked="false" /></div></div>'
+  + '<div class="form-group clearfix"><div class="control-label">Description</div><div class="col-sm-12"><textarea name="timetrack_description" placeholder="Please enter your activity description here"></textarea></div></div>'
+  + '<div class="form-group clearfix"><div class="pull-left">Free hours?</div><div class="control-label"><input type="checkbox" checked="false" /></div></div>'
   + '<button name="create_timetrack" value="CreateTime" class="" type="submit">Update work log</button>'
   + '</div>'
   '</div>';
@@ -38,7 +38,7 @@ function createWidget() {
   + '<div class="selectbox hide-collapsed">'
   + '<div class="form-group"><div class="control-label">Hours</div><div class="col-sm-12"><input placeholder="Hours" value="0" type="number" min="0" step="1" name="estimation_hours" /></div></div>'
   + '<div class="form-group"><div class="control-label">Minutes</div><div class="col-sm-12"><input placeholder="Minutes" value="0" type="number" min="0" max="60" step="15" name="estimation_minutes" /></div></div>'
-  + '<div class="form-group"><div class="control-label">Description</div><div class="col-sm-12"><textarea name="estimation_description" placeholder="Please enter your estimation description here"></textarea></div></div>'
+  + '<div class="form-group clearfix"><div class="control-label">Description</div><div class="col-sm-12"><textarea name="estimation_description" placeholder="Please enter your estimation description here"></textarea></div></div>'
   + '<button name="create_estimation" value="CreateEstimation" class="" type="submit">Update Time Estimation</button>'
   + '</div>'
   '</div>';
