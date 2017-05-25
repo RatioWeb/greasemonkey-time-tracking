@@ -18,7 +18,7 @@ function createWidget() {
   // Create time tracking widget.
   var timetracking = '<div class=\'block timetracking\'>'
   + '<div class=\'title hide-collapsed\'>Time tracking (<span class="timetrack-data bold">' + formatted_sum
-  + '</span>)<a class="edit-link pull-right" href="#">Edit</a>'
+  + '</span>h)<a class="edit-link pull-right" href="#">Edit</a>'
   + '</div>'
   + '<div id="timetracking-messages"></div>'
   + '<div class="selectbox hide-collapsed">'
@@ -125,7 +125,8 @@ function createTimeTrackingComment(emoji, additional, type) {
  */
 function aggregateSumOfTrackingComment() {
     var time = moment.duration();
-    $('li.note img.emoji[title=":clock1:"]').each (function() {
+    console.log(":: test ");
+    $('li.note gl-emoji[data-name="clock1"]').each (function() {
       var data = $(this).parent().text().split('|').map(function(element) { return $.trim(element); });
       var hours_matched = data[0].match(/(\d+)h/);
       var minutes_matched = data[0].match(/(\d+)m/);
@@ -142,7 +143,6 @@ function aggregateSumOfTrackingComment() {
           'days': days
         })
       );
-
     });
 
     return time.asHours();
@@ -153,7 +153,7 @@ function aggregateSumOfTrackingComment() {
  */
 function getEstimationTime() {
     var time = moment.duration();
-    $('li.note img.emoji[title=":dart:"]').last().each (function() {
+    $('li.note gl-emoji[data-name="dart"]').last().each (function() {
       var data = $(this).parent().text().split('|').map(function(element) { return $.trim(element); });
       var hours_matched = data[0].match(/(\d+)h/);
       var minutes_matched = data[0].match(/(\d+)m/);
@@ -170,7 +170,6 @@ function getEstimationTime() {
           'days': days
         })
       );
-
     });
 
     return time.asHours();
